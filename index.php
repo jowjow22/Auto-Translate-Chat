@@ -16,23 +16,23 @@
 			 <div class="user-bar">
 				<img src="img/hmgaiss.jpg" class="user-image">
 				<h6>O nome do cara</h6><br>
-				<div class="status online"></div><p class="text-muted">Online</p>
+				<div class="status online"></div><p class="">Online</p>
 			</div>
 				<span class="user-bar-icons float-right">
 					<i class="material-icons">cached</i>
           			<i class="material-icons">message</i>
           			<i class="material-icons">menu</i>
 				</span>
-				<div class="search">
-					<input type="text" name="">
-				</div>
+				<form class="search">
+					<input placeholder="Pesquise Aqui!" type="text" name=""><button type="submit"><i class="material-icons">search</i></button>
+				</form>
 				<div class="friend-messages" data-spy="scroll">
 					<div class="friend">
 					<img src="img/hm.jpg" class="user-image float-left">
 					<div class="status online"></div>
 					<span class="time float-right">2:40</span>
 					<h6>Gumel gay</h6>
-					<p class="text-muted">minha ultima mensagem é esse nude</p>
+					<p class="">minha ultima mensagem é esse nude</p>
 					</div>
 					<hr>
 					<div class="friend">
@@ -40,7 +40,15 @@
 					<div class="status online"></div>
 					<span class="time float-right">2:40</span>
 					<h6>Gumel gay</h6>
-					<p class="text-muted">minha ultima mensagem é esse nude</p>
+					<p class="">minha ultima mensagem é esse nude</p>
+					</div>
+					<hr>
+					<div class="friend">
+					<img src="img/hm.jpg" class="user-image float-left">
+					<div class="status online"></div>
+					<span class="time float-right">2:40</span>
+					<h6>Gumel gay</h6>
+					<p class="">minha ultima mensagem é esse nude</p>
 					</div>
 					<hr>
 					<div class="friend">
@@ -48,7 +56,7 @@
 					<div class="status offline"></div>
 					<span class="time float-right">2:40</span>
 					<h6>Gumel gay</h6>
-					<p class="text-muted">minha ultima mensagem é esse nude</p>
+					<p class="">minha ultima mensagem é esse nude</p>
 					</div>
 					<hr>
 					<div class="friend">
@@ -56,7 +64,7 @@
 					<div class="status online"></div>
 					<span class="time float-right">2:40</span>
 					<h6>Gumel gay</h6>
-					<p class="text-muted">minha ultima mensagem é esse nude</p>
+					<p class="">minha ultima mensagem é esse nude</p>
 					</div>
 					<hr>
 					<div class="friend">
@@ -64,15 +72,7 @@
 					<div class="status online"></div>
 					<span class="time float-right">2:40</span>
 					<h6>Gumel gay</h6>
-					<p class="text-muted">minha ultima mensagem é esse nude</p>
-					</div>
-					<hr>
-					<div class="friend">
-					<img src="img/hm.jpg" class="user-image float-left">
-					<div class="status online"></div>
-					<span class="time float-right">2:40</span>
-					<h6>Gumel gay</h6>
-					<p class="text-muted">minha ultima mensagem é esse nude</p>
+					<p class="">minha ultima mensagem é esse nude</p>
 					</div>
 					<hr>
 				</div>	
@@ -89,11 +89,79 @@
 					</span>
 				</div>
 				<div class="chat-area">
-					<div class="messages-area"></div>
+					<div class="messages-area">
+						<div class="row no-gutters friend-message">
+							<div class="col-xl-10">
+								<div class="chat-bubble">
+									<p>eae manito!</p>
+								</div>
+							</div>
+						</div>
+						<div class="row no-gutters your-message">
+							<div class="col-xl-10 offset-xl-6">
+								<div class="chat-bubble">
+									<p>opa!</p>
+								</div>
+							</div>
+						</div>
+						<div class="row no-gutters friend-message">
+							<div class="col-xl-10">
+								<div class="chat-bubble">
+									<p>eae manito!  asdasdasd asdasdasd asdadasd asdadasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdas asdasdas adsad</p>
+								</div>
+							</div>
+						</div>
+						<div class="row no-gutters your-message">
+							<div class="col-xl-10 offset-xl-6">
+								<div class="chat-bubble">
+									<p>opa! asdasdasd asdasdasd asdadasd asdadasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdas asdasdas adsad</p>
+								</div>
+							</div>
+						</div>
+						<div class="row no-gutters your-message">
+							<div class="col-xl-10 offset-xl-6">
+								<div class="chat-bubble">
+									<p>opa! asdasdasd asdasdasd asdadasd asdadasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdas asdasdas adsad</p>
+								</div>
+							</div>
+						</div>
+						<div class="row no-gutters friend-message">
+							<div class="col-xl-10">
+								<div class="chat-bubble">
+									<p>eae manito! asdasdasd asdasdasd asdadasd asdadasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdas asdasdas adsad</p>
+								</div>
+							</div>
+						</div>
+						<div class="row no-gutters your-message">
+							<div class="col-xl-10 offset-xl-6">
+								<div class="chat-bubble">
+									<p>opa! asdasdasd asdasdasd asdadasd asdadasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdas asdasdas adsad</p>
+								</div>
+							</div>
+						</div>
+						<div class="row no-gutters your-message">
+							<div class="col-xl-10 offset-xl-6">
+								<div class="chat-bubble">
+									<p>opa! asdasdasd asdasdasd asdadasd asdadasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdas asdasdas adsad</p>
+								</div>
+							</div>
+						</div>
+						<div class="row no-gutters your-message">
+							<div class="col-xl-10 offset-xl-6">
+								<div class="chat-bubble">
+									<p>opa! asdasdasd asdasdasd asdadasd asdadasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdas asdasdas adsad</p>
+								</div>
+							</div>
+						</div>
+					</div>
 						<form class="send-messages-area">
-							<textarea></textarea>
+							<textarea placeholder="Mande Mensagens!"></textarea><button type="submit" class="float-right"><i class="material-icons">send</i></button>
+							<div class="message-icons">
+								<a href="#"><i class="material-icons">attach_file</i></a>
+								<a href="#"><i class="material-icons">emoji_emotions</i></a>
+							</div>
 						</form>
-						<input type="hidden" name="">https://codepen.io/FilipRastovic/pen/pXgqKK</input>
+						<!-- <input type="hidden" name="">https://codepen.io/FilipRastovic/pen/pXgqKK</input> -->
 						
 				</div>
 			</div>
