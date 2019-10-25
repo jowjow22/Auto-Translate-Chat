@@ -9,19 +9,24 @@
 </head>
 <body>
 	<div class="container-fluid bg-fluid">
-		<div class="row bg-login">
+		<div class="row bg">
 			<div class="col-md-6 col-lg-6 col-xl-6 col-sm-6 bg-pink"></div>
 			<div class="col-md-6 col-lg-6 col-xl-6 col-sm-6 bg-normal"></div>
 		</div>
 	</div>
 	<div class="container-fluid">
-				<div class="row principal">
-		<div class="col-md-5 col-lg-5 col-xl-5 col-sm-5 offset-md-1 bg-white login-area">
-			<form action="chatArea.php">
-				<h2>Entre!</h2><br>
+		<div class="row principal-cadastro">
+		<div class="col-md-5 col-lg-5 col-xl-5 col-sm-5 offset-md-1 bg-white cadastro-area">
+			<form>
+				<h2>Cadastre-se!</h2><br>
+				<input type="text" name="" placeholder="Usuário"><br>
+				<input type="date" name="" placeholder="Usuário"><br>
+				<input type="text" name="" placeholder="Usuário"><br>
 				<input type="text" name="" placeholder="Usuário"><br>
 				<input type="password" name="" placeholder="*****"><br><br>
-				<a href="cadastro.php">Não tem Conta? Cadastre-se</a><br>
+				<input type="file" name=""><br>
+				<textarea></textarea><br>
+				<a href="cadastro.php">Já tem Conta? Faça Login!</a><br>
 				<input type="submit" name="" value="Entrar">
 			</form>
 		</div>
