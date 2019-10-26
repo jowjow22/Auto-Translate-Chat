@@ -16,31 +16,31 @@
 }
 .principal{
 	margin-top: -665px;
-	box-shadow: 5px 5px 80px rgb(0,0,0,.4); 
-	z-index: 2;
 	text-align: center;
 }
 .principal-cadastro{
-	margin-top: -1025px;
-	box-shadow: 5px 5px 80px rgb(0,0,0,.9); 
-	z-index: 2;
+	margin-top: -1080px;
+	box-shadow: 5px 5px 80px rgb(0,0,0,.4); 
 	text-align: center;
 }
 .bg-invert{
 	background: #FE3565;
+	box-shadow: 5px 5px 80px rgb(0,0,0,.4); 
 }
 .login-area{
 	padding-bottom: 150px;
 	padding-top: 150px;
+	box-shadow: 5px 5px 80px rgb(0,0,0,.4); 
 }
 .cadastro-area{
 		padding-bottom: 100px;
 	padding-top: 100px;
+	box-shadow: 5px 5px 80px rgb(0,0,0,.4); 
 }
 .login-area form h2, .cadastro-area form h2{
 	font-weight: bold;
 }
-.login-area form input[type="text"], input[type="password"], .cadastro-area form input[type="text"], input[type="password"]{
+.login-area form input[type="text"], input[type="password"], .cadastro-area form input[type="text"], input[type="password"],.button, .cadastro-area form select{
 	padding: 10px 13px;
 	width: 60%;
 	margin-top: 25px;
