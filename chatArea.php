@@ -1,9 +1,17 @@
 <?php 	
-session_start();
 	require_once('classesPHP/conexao.php');
-	if ($_POST) {
-		CadastrarMsgs($_SESSION['cd_user'],0,$_POST['textarea']);
-	}
+	 session_start();
+	 if (!isset($_SESSION['cd_user']))
+	 {
+		    header("location: index.php");
+		    exit;
+  	}
+	$u = new Usuario;
+	$c = new Conexao;
+	$c->conectar("db_autoTranslateChat","localhost","root","");
+	$u->userDados($_SESSION['cd_user']);
+	$u->selAmigos($_SESSION['cd_user']);
+	$userDados = $user->fetch(PDO::FETCH_ASSOC);
 ?>
 <!DOCTYPE html>
 <html>
@@ -21,9 +29,9 @@ session_start();
 	<div class="row no-gutters">
 		<div class="col-md-4 border-right">
 			 <div class="user-bar">
-				<img src="img/hmgaiss.jpg" class="user-image">
-				<h6>O nome do cara</h6><br>
-				<div class="status online"></div><p class="">Online</p>
+				<img src="<?php echo $userDados['img_user']; ?>" class="user-image">
+				<h6><?php echo $userDados['nm_user']; ?></h6><br>
+				<div class="status <?php echo $userDados['nm_status'];?>"></div><p class=""><?php echo $userDados['nm_status']; ?></p>
 			</div>
 				<span class="user-bar-icons float-right">
 					<i class="material-icons">cached</i>
@@ -34,54 +42,17 @@ session_start();
 					<input placeholder="Pesquise Aqui!" type="text" name=""><button type="submit"><i class="material-icons">search</i></button>
 				</form>
 				<div class="friend-messages" data-spy="scroll">
+					<?php while ($amgDados = $amg->fetch(PDO::FETCH_ASSOC)) {?>
 					<div class="friend">
-					<img src="img/hm.jpg" class="user-image float-left">
-					<div class="status online"></div>
+					<img src="<?php echo $amgDados['img_user']; ?>" class="user-image float-left">
+					<div class="status <?php echo $amgDados['nm_status'] ?>"></div>
 					<span class="time float-right">2:40</span>
-					<h6>Gumel gay</h6>
+					<h6><?php echo $amgDados['nm_login']; ?></h6>
 					<p class="">minha ultima mensagem é esse nude</p>
 					</div>
 					<hr>
-					<div class="friend">
-					<img src="img/hm.jpg" class="user-image float-left">
-					<div class="status online"></div>
-					<span class="time float-right">2:40</span>
-					<h6>Gumel gay</h6>
-					<p class="">minha ultima mensagem é esse nude</p>
-					</div>
-					<hr>
-					<div class="friend">
-					<img src="img/hm.jpg" class="user-image float-left">
-					<div class="status online"></div>
-					<span class="time float-right">2:40</span>
-					<h6>Gumel gay</h6>
-					<p class="">minha ultima mensagem é esse nude</p>
-					</div>
-					<hr>
-					<div class="friend">
-					<img src="img/hm.jpg" class="user-image float-left">
-					<div class="status offline"></div>
-					<span class="time float-right">2:40</span>
-					<h6>Gumel gay</h6>
-					<p class="">minha ultima mensagem é esse nude</p>
-					</div>
-					<hr>
-					<div class="friend">
-					<img src="img/hm.jpg" class="user-image float-left">
-					<div class="status online"></div>
-					<span class="time float-right">2:40</span>
-					<h6>Gumel gay</h6>
-					<p class="">minha ultima mensagem é esse nude</p>
-					</div>
-					<hr>
-					<div class="friend">
-					<img src="img/hm.jpg" class="user-image float-left">
-					<div class="status online"></div>
-					<span class="time float-right">2:40</span>
-					<h6>Gumel gay</h6>
-					<p class="">minha ultima mensagem é esse nude</p>
-					</div>
-					<hr>
+				<?php } ?>
+
 				</div>	
 			</div>
 			<div class="col-md-8">
@@ -163,10 +134,6 @@ session_start();
 					</div>
 						<form class="send-messages-area" method="post" id="form">
 							<textarea placeholder="Mande Mensagens!" name="textarea" id="msg"></textarea><button type="submit" class="float-right"><i class="material-icons">send</i></button>
-							<div class="message-icons">
-								<a href="#"><i class="material-icons">attach_file</i></a>
-								<a href="#"><i class="material-icons">emoji_emotions</i></a>
-							</div>
 						</form>
 						<!-- <input type="hidden" name="">https://codepen.io/FilipRastovic/pen/pXgqKK</input> -->
 						
@@ -174,28 +141,9 @@ session_start();
 			</div>
 		</div>
 	</div>
-<script src="jquery.min.js"></script>
 <script src="node_modules/jquery/dist/jquery.js"></script>
 <script src="node_modules/popper.js/dist/umd/popper.js"></script>
 <script src="node_modules/bootstrap/dist/js/bootstrap.js"></script>
 <script src="node_modules/@fortawesome/fontawesome-free/js/all.js"></script>
-<script type="text/javascript">
-		$(document).on('submit','#form',function(){
-				var dados = $(this).serialize();
-				//tratar erros
-				$.ajax({
-					type: 'POST',
-					url: 'chat.php',
-					data: dados,
-					success: function(retorno){
-							$('#msg').val("");
-					}
-				});
-				return false;
-		});	
-		setInterval(listarMsgs(){
-			$('.messages-area').load('msgs.php');
-		},500)
-</script>
 </body>
 </html>

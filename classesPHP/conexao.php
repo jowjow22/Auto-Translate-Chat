@@ -16,7 +16,7 @@ class Conexao{
 }
 Class Usuario
 {
-	private $pais,$paisSelect;
+	private $pais,$paisSelect,$user,$userDados,$amg,$amgDados;
 	public function cadastrar($nome, $nascimento, $login, $senha, $img,$nmImg, $bio, $idPais)
 	{
 
@@ -32,7 +32,7 @@ Class Usuario
 		}
 		else //caso nao, cadastrar
 		{
-			$dir ="img/user/".$nmImg;
+			$dir ="img/users/".$nmImg;
 		move_uploaded_file($_FILES['imagem']['tmp_name'], $diretorio.$nmImg);
 			$sql = $pdo->prepare('INSERT INTO tb_user (nm_user, dt_nascimento, nm_login,nm_status, nm_password, img_user,txt_bio,id_pais) VALUES (:n, :nas, :l,:sts, :s, :img, :bio, :idP)');
 			$sql->bindValue(":n",$nome);
@@ -78,27 +78,37 @@ Class Usuario
 		$paisSelect->execute();
 		$pais;
 	}
-
-	public function CadastrarMsgs($origem, $destino, $msg){
-		global $pdo;
-		$sql=$pdo->prepare('INSERT into tb_msg values(null,:m, :o, :d)');
-		$sql->bindValue(':m', $msg);
-		$sql->bindValue(':o', $origem);
-		$sql->bindValue(':d', $destino);
-		$sql->execute();
+	public function userDados($id){
+		global $pdo, $user, $userDados;
+		$user = $pdo->prepare("SELECT * FROM tb_user WHERE cd_user = :c");
+		$user->bindValue(":c", $id);
+		$user->execute();
+		$userDados;
 	}
-	public function listarMsg(){
-		global $pdo;
-		$sql=$pdo->prepare('SELECT m.*, u.nm_user from tb_user u, tb_msg m where u.cd_user=m.id_origem ORDER BY m.cd_msg ASC');
-		$todas=$pdo->query($sql);
-			while ($msg= $todas->fetch_array()) {
-				if ($msg['nm_user']==$_SESSION['cd_user']) {
-					echo '<div class="row no-gutters your-message"><div class="col-xl-10 offset-xl-6"><div class="chat-bubble"><p>"'.$msg['txt_msg'].'"</p></div></div></div>';
-				}
-				else{
-					echo '<div class="row no-gutters friend-message"><div class="col-xl-10 offset-xl-6"><div class="chat-bubble"><p>'.$msg['txt_msg'].'</p></div></div></div>';
-				}
-			}
+	public function selAmigos($id){
+		global $pdo, $amg, $amgDados;
+		$sql = $pdo->prepare("select * from tb_amizades where id_adicionou = :c or id_adicionado = :c");
+		$sql->bindValue(":c",$id);
+		$sql->execute();
+		while ($amizades = $sql->fetch(PDO::FETCH_ASSOC)) {
+		$amg = "";
+		$amgDados="";
+		if ($id == $amizades['id_adicionou']) {
+		$amg = $pdo->prepare("select u.* from tb_user u where cd_user in (select id_adicionado from tb_amizades where id_adicionou = :c)");
+		$amg->bindValue(":c", $id);
+		$amg->execute();
+		$amgDados;
+		}
+		else{
+		$amg = $pdo->prepare("select u.* from tb_user u where cd_user in (select id_adicionou from tb_amizades where id_adicionado = :c)");
+		$amg->bindValue(":c", $id);
+		$amg->execute();
+		$amgDados;
+
+		}
+		}
+
+
 	}
 }
 

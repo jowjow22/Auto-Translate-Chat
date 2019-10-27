@@ -148,10 +148,10 @@ hr {
 .friend:hover{
 	background: #462b82;
 }
-.online{
+.Online{
 	background: #3ae374;
 }
-.offline{
+.Offline{
 	background: #ff4d4d;
 }
 .atual-chat{
@@ -211,7 +211,7 @@ hr {
 }
 .send-messages-area textarea{
 	resize: none;
-	width: 75%;
+	width: 85%;
 	height: 100%;
 	border: none;
 	border-radius: 40px;
