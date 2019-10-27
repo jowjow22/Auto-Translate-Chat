@@ -3,6 +3,11 @@ create database db_autoTranslateChat;
 
 use db_autoTranslateChat;
 
+create table tb_paises(
+cd_pais int not null auto_increment primary key,
+nm_pais varchar(150) not null unique,
+sg_lingua varchar(5) not null
+);
 create table tb_user(
 cd_user int not null auto_increment primary key,
 nm_user varchar(200) not null,
@@ -13,7 +18,7 @@ nm_password varchar(32) not null,
 img_user varchar(300) not null,
 txt_bio longtext not null,
 id_pais int not null,
-foreign key (id_pais) references tb_paises (cd_paises)
+foreign key (id_pais) references tb_paises (cd_pais)
 );
 create table tb_msg(
 cd_msg int not null auto_increment primary key,
@@ -22,9 +27,5 @@ id_origem int not null,
 id_destino int not null,
 foreign key (id_origem) references tb_user (cd_user)
 );
-create table tb_paises(
-cd_pais int not null auto_increment primary key,
-nm_pais varchar(150) not null unique,
-sg_lingua varchar(5) not null
-);
+
 insert into tb_paises values(null,"brasil","pt"),(null,"estado unidos","en"),(null,"peru","es");

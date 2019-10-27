@@ -1,3 +1,10 @@
+<?php 	
+session_start();
+	require_once('classesPHP/conexao.php');
+	if ($_POST) {
+		CadastrarMsgs($_SESSION['cd_user'],0,$_POST['textarea']);
+	}
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -154,8 +161,8 @@
 							</div>
 						</div>
 					</div>
-						<form class="send-messages-area">
-							<textarea placeholder="Mande Mensagens!"></textarea><button type="submit" class="float-right"><i class="material-icons">send</i></button>
+						<form class="send-messages-area" method="post" id="form">
+							<textarea placeholder="Mande Mensagens!" name="textarea" id="msg"></textarea><button type="submit" class="float-right"><i class="material-icons">send</i></button>
 							<div class="message-icons">
 								<a href="#"><i class="material-icons">attach_file</i></a>
 								<a href="#"><i class="material-icons">emoji_emotions</i></a>
@@ -167,9 +174,28 @@
 			</div>
 		</div>
 	</div>
+<script src="jquery.min.js"></script>
 <script src="node_modules/jquery/dist/jquery.js"></script>
 <script src="node_modules/popper.js/dist/umd/popper.js"></script>
 <script src="node_modules/bootstrap/dist/js/bootstrap.js"></script>
 <script src="node_modules/@fortawesome/fontawesome-free/js/all.js"></script>
+<script type="text/javascript">
+		$(document).on('submit','#form',function(){
+				var dados = $(this).serialize();
+				//tratar erros
+				$.ajax({
+					type: 'POST',
+					url: 'chat.php',
+					data: dados,
+					success: function(retorno){
+							$('#msg').val("");
+					}
+				});
+				return false;
+		});	
+		setInterval(listarMsgs(){
+			$('.messages-area').load('msgs.php');
+		},500)
+</script>
 </body>
 </html>
