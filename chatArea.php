@@ -12,6 +12,10 @@
 	$u->userDados($_SESSION['cd_user']);
 	$u->selAmigos($_SESSION['cd_user']);
 	$userDados = $user->fetch(PDO::FETCH_ASSOC);
+	if ($_POST) {
+		 $u->cadastrarMsg($_POST['textarea'], 1, 2);
+	}
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -203,6 +207,20 @@
 	$(document).on('click', '#sair', function(){
 		window.location = "index.php";
 	});
+
+	$(document).on('submit','#form',function(){
+				var dados = $(this).serialize();
+				//tratar erros
+				$.ajax({
+					type: 'POST',
+					url: 'chatArea.php',
+					data: dados,
+					success: function(retorno){
+							$('#msg').val("");
+					}
+				});
+				return false;
+		});
 </script>
 <script src="node_modules/popper.js/dist/umd/popper.js"></script>
 <script src="node_modules/bootstrap/dist/js/bootstrap.js"></script>

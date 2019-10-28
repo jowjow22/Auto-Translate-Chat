@@ -104,18 +104,18 @@ if($_POST['senha']==$_POST['confirmaSenha']){
                 var msg = document.getElementById("msg-fail");
                  msg.style.opacity = "0";  
             }, 2000);
-            $(document).on('submit', '#form', function(){
-            var dados = $(this).serialize();
-			$.ajax({
-			type:'POST',
-			url: 'cadastro.php',
-			data: dados,
-			success: function(retorno){
-				$("#msg").html(retorno);
-			}
-		});
-	return false;
-});
+//             $(document).on('submit', '#form', function(){
+//             var dados = $(this).serialize();
+// 			$.ajax({
+// 			type:'POST',
+// 			url: 'cadastro.php',
+// 			data: dados,
+// 			success: function(retorno){
+// 				$("#msg").html(retorno);
+// 			}
+// 		});
+// 	return false;
+// });
         </script>
 <script src="node_modules/popper.js/dist/umd/popper.js"></script>
 <script src="node_modules/bootstrap/dist/js/bootstrap.js"></script>
