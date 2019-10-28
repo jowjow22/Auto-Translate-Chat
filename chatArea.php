@@ -34,7 +34,7 @@
 				<div class="status <?php echo $userDados['nm_status'];?>"></div><p class=""><?php echo $userDados['nm_status']; ?></p>
 			</div>
 				<span class="user-bar-icons float-right">
-					<i class="material-icons">cached</i>
+					<i class="material-icons" data-target="#adicionar" data-toggle="modal">person_add</i>
           			<i class="material-icons">message</i>
           			<i class="material-icons">menu</i>
 				</span>
@@ -42,7 +42,13 @@
 					<input placeholder="Pesquise Aqui!" type="text" name=""><button type="submit"><i class="material-icons">search</i></button>
 				</form>
 				<div class="friend-messages" data-spy="scroll">
-					<?php while ($amgDados = $amg->fetch(PDO::FETCH_ASSOC)) {?>
+					<?php while ($amizade = $amg->fetch(PDO::FETCH_ASSOC)) {
+						if($amizade['id_adicionou'] == $_SESSION['cd_user']){
+							$sql = $pdo->prepare("select * from tb_user where cd_user = :c");
+							$sql->bindValue(":c",$amizade['id_adicionado']);
+							$sql->execute();
+							$amgDados = $sql->fetch(PDO::FETCH_ASSOC);
+						?>
 					<div class="friend">
 					<img src="<?php echo $amgDados['img_user']; ?>" class="user-image float-left">
 					<div class="status <?php echo $amgDados['nm_status'] ?>"></div>
@@ -51,7 +57,23 @@
 					<p class="">minha ultima mensagem é esse nude</p>
 					</div>
 					<hr>
-				<?php } ?>
+				<?php }
+
+					else{
+							$sql = $pdo->prepare("select * from tb_user where cd_user = :c");
+							$sql->bindValue(":c",$amizade['id_adicionou']);
+							$sql->execute();
+							$amgDados = $sql->fetch(PDO::FETCH_ASSOC);
+							?>
+					<div class="friend">
+					<img src="<?php echo $amgDados['img_user']; ?>" class="user-image float-left">
+					<div class="status <?php echo $amgDados['nm_status'] ?>"></div>
+					<span class="time float-right">2:40</span>
+					<h6><?php echo $amgDados['nm_login']; ?></h6>
+					<p class="">minha ultima mensagem é esse nude</p>
+					</div>
+					<hr>
+				<?php }} ?>
 
 				</div>	
 			</div>
@@ -63,7 +85,7 @@
 					<span class="atual-chat-icons float-right">
 						<i class="material-icons">video_call</i>
 	          			<i class="material-icons">phone</i>
-	          			<i class="material-icons">settings_applications</i>
+	          			<i class="material-icons" data-toggle="modal" data-target="#modalSaida">exit_to_app</i>
 					</span>
 				</div>
 				<div class="chat-area">
@@ -141,7 +163,47 @@
 			</div>
 		</div>
 	</div>
+	<div class="modal fade" id="modalSaida" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Poxa :c, não quer ficar mais um pouco?</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Deseja mesmo sair da sua conta?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Cancelar</button>
+        <button type="button" id="sair" class="btn btn-danger">Sair</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="adicionar" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+      	<h5 class="modal-title" id="exampleModalLabel">Qual amizade deseja fazer hoje?</h5>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
 <script src="node_modules/jquery/dist/jquery.js"></script>
+<script type="text/javascript">
+	$(document).on('click', '#sair', function(){
+		window.location = "index.php";
+	});
+</script>
 <script src="node_modules/popper.js/dist/umd/popper.js"></script>
 <script src="node_modules/bootstrap/dist/js/bootstrap.js"></script>
 <script src="node_modules/@fortawesome/fontawesome-free/js/all.js"></script>

@@ -1,5 +1,13 @@
 <?php 
 require_once('classesPHP/conexao.php');
+session_start();
+	if (isset($_SESSION['cd_user']))
+	{
+	 	session_destroy();
+  	}
+  	else{
+  		session_destroy();
+  	}
 $res = "";
 $c = new Conexao;
 $c->conectar("db_autoTranslateChat","localhost","root","");

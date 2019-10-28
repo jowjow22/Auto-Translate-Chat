@@ -35,20 +35,7 @@ id_adicionado int not null,
 foreign key (id_adicionou) references tb_user (cd_user),
 foreign key (id_adicionado) references tb_user (cd_user)
 );
-drop table tb_amizades;
-select * from tb_amizades;
-insert into tb_amizades values(null,1,2);
-insert into tb_amizades values(null,1,3);
-insert into tb_amizades values(null,2,3);
-
-select cd_amizade from tb_amizades where id_adicionou = 2 or id_adicionado = 2;
-select u.* from tb_user u where cd_user in (select id_adicionou from tb_amizades where id_adicionado = 2);
+select * from tb_user where cd_user in ( select id_adicionado from tb_amizades where id_adicionou != 1 and id_adicionado != 1);
+select * from tb_user;
 insert into tb_paises values(null,"brasil","pt"),(null,"estado unidos","en"),(null,"peru","es");
-delimiter $
-create trigger trg_amizade_insert after insert
-on tb_amizades
-for each row
-begin
-insert into tb_amizades values(null, new.id_adicionado,new.id_adicionou);
-end$
-DELIMITER ;
+insert into tb_amizades values(null,1,2);

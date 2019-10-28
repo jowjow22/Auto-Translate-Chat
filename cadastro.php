@@ -21,26 +21,31 @@ if($_POST['senha']==$_POST['confirmaSenha']){
 					$res = '<div class="alert alert-success mt-5" id="msg-success" role="alert">
 					 			cadastrado com sucesso!
 							</div>';
+							echo $res;
 
 				}
 				else{
 					$res = '<div class="alert alert-danger mt-5" id="msg-fail" role="alert">
 					 			usuario existente!
 							</div>';
+							echo $res;
 				}
 			}
 			else{
 				$res = '<div class="alert alert-danger mt-5" id="msg-fail" role="alert">
 					 			Preencha todos os campos!
 							</div>';
+							echo $res;
 			}
 		}
 		else{
 				$res = '<div class="alert alert-danger mt-5" id="msg-fail" role="alert">
 					 			As senhas nao correspondem!
 				</div>';
+				echo $res;
 		}
 	}
+	else{
 ?>
 <!DOCTYPE html>
 <html>
@@ -61,7 +66,7 @@ if($_POST['senha']==$_POST['confirmaSenha']){
 	<div class="container-fluid">
 		<div class="row principal-cadastro">
 		<div class="col-md-5 col-lg-5 col-xl-5 col-sm-5 offset-md-1 bg-white cadastro-area">
-			<form enctype="multipart/form-data" method="post">
+			<form enctype="multipart/form-data" id="form" method="post">
 				<h2>Cadastre-se!</h2><br>
 				<input type="text" name="nome" placeholder="nome e sobrenome"><br>
 				<input type="date" name="nascimento"><br>
@@ -69,27 +74,29 @@ if($_POST['senha']==$_POST['confirmaSenha']){
 				<input type="password" name="senha" placeholder="*****"><br>
 				<input type="password" name="confirmaSenha" placeholder="confirme a Senha"><br>
 				<input type="file" accept="img/*" name="imagem" id="file" style="display: none;"><label for="file" class="button" name="imagem"><i class="material-icons">photo</i>&nbsp;Escolha uma imagem </label><br>
-				<textarea name="bio"></textarea><br>
+				<textarea name="bio" placeholder="coloque sua biografia aqui"></textarea><br>
 				<select name="pais">
 					<?php while($pais = $paisSelect->fetch(PDO::FETCH_ASSOC)){ ?>
 						<option value="<?php echo $pais['cd_pais'] ?>"><img src="img/b.jpg"><?php echo $pais['nm_pais'] ?></option>
 					<?php } ?>
 				</select><br>
 				<a href="index.php">Já tem Conta? Faça Login!</a><br>
-				<input type="submit" name="" value="Entrar"><br>
+				<input type="submit" id="cadastre" value="Entrar"><br>
 			</form>
 		</div>
 		<div class="col-md-5 col-lg-5 col-xl-5 col-sm-5 bg-invert">
 			<strong>
 				<h2>Olá, Amigo!</h2><br>
 			<p>Entre com seus dados pessoais e<br>faça muitas amizades!</p>
-			<?php echo $res ?>
+			<div id="msg"></div>
 			</strong>
 		</div>
 	</div>
 	</div>
+
+<script src="node_modules/jquery/dist/jquery.js"></script>
         <script>
-            setTimeout(function(){ 
+        	setTimeout(function(){ 
                 var msg = document.getElementById("msg-success");
                 msg.style.opacity = "0";   
             }, 2000);
@@ -97,10 +104,22 @@ if($_POST['senha']==$_POST['confirmaSenha']){
                 var msg = document.getElementById("msg-fail");
                  msg.style.opacity = "0";  
             }, 2000);
+            $(document).on('submit', '#form', function(){
+            var dados = $(this).serialize();
+			$.ajax({
+			type:'POST',
+			url: 'cadastro.php',
+			data: dados,
+			success: function(retorno){
+				$("#msg").html(retorno);
+			}
+		});
+	return false;
+});
         </script>
-<script src="node_modules/jquery/dist/jquery.js"></script>
 <script src="node_modules/popper.js/dist/umd/popper.js"></script>
 <script src="node_modules/bootstrap/dist/js/bootstrap.js"></script>
 <script src="node_modules/@fortawesome/fontawesome-free/js/all.js"></script>
 </body>
 </html>
+<?php } ?>

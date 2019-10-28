@@ -16,7 +16,7 @@ class Conexao{
 }
 Class Usuario
 {
-	private $pais,$paisSelect,$user,$userDados,$amg,$amgDados;
+	private $pais,$paisSelect,$user,$userDados,$amg,$amgDados,$amizade;
 	public function cadastrar($nome, $nascimento, $login, $senha, $img,$nmImg, $bio, $idPais)
 	{
 
@@ -86,30 +86,13 @@ Class Usuario
 		$userDados;
 	}
 	public function selAmigos($id){
-		global $pdo, $amg, $amgDados;
-		$sql = $pdo->prepare("select * from tb_amizades where id_adicionou = :c or id_adicionado = :c");
-		$sql->bindValue(":c",$id);
-		$sql->execute();
-		while ($amizades = $sql->fetch(PDO::FETCH_ASSOC)) {
-		$amg = "";
-		$amgDados="";
-		if ($id == $amizades['id_adicionou']) {
-		$amg = $pdo->prepare("select u.* from tb_user u where cd_user in (select id_adicionado from tb_amizades where id_adicionou = :c)");
-		$amg->bindValue(":c", $id);
+		global $pdo, $amg, $amgDados,$amizade;
+		$amg = $pdo->prepare("select * from tb_amizades where id_adicionou = :c or id_adicionado = :c");
+		$amg->bindValue(":c",$id);
 		$amg->execute();
-		$amgDados;
-		}
-		else{
-		$amg = $pdo->prepare("select u.* from tb_user u where cd_user in (select id_adicionou from tb_amizades where id_adicionado = :c)");
-		$amg->bindValue(":c", $id);
-		$amg->execute();
-		$amgDados;
-
-		}
 		}
 
 
-	}
 }
 
 ?>
