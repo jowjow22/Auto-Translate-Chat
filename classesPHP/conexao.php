@@ -16,7 +16,7 @@ class Conexao{
 }
 Class Usuario
 {
-	private $pais,$paisSelect,$user,$userDados,$amg,$amgDados,$amizade;
+	private $pais,$paisSelect,$user,$userF,$userDados,$amg,$amgDados,$amizade,$sql;
 	public function cadastrar($nome, $nascimento, $login, $senha, $img,$nmImg, $bio, $idPais)
 	{
 
@@ -91,7 +91,27 @@ Class Usuario
 		$amg->bindValue(":c",$id);
 		$amg->execute();
 		}
-
+	public function sair($id){
+		global $pdo;
+			$sql = $pdo->prepare('UPDATE tb_user SET nm_status = "Offline" WHERE cd_user = :c');
+			$sql->bindValue(":c",$id);
+			$sql->execute();
+			session_destroy();
+	}
+	public function atualChat($id){
+		global $pdo,$userF,$sql;
+			$sql = $pdo->prepare('SELECT * FROM tb_user WHERE cd_user = :c');
+			$sql->bindValue(":c",$id);
+			$sql->execute();
+			$userF = $sql->fetch(PDO::FETCH_ASSOC);
+			echo '<script type="text/javascript">
+			$(".nm_user").html("'.$userF['nm_user'].'");
+			$("#status").html("'.$userF['nm_status'].'");
+			$("#p-chat-img").attr("src","'.$userF['img_user'].'");
+			$("#p-chat-img").animate({"opacity":"1"},"slow");
+			$("#atual-chat-status").addClass("'.$userF['nm_status'].'");
+			</script>';
+	}
 
 }
 

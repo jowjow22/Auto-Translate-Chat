@@ -73,7 +73,7 @@ if($_POST['senha']==$_POST['confirmaSenha']){
 				<input type="text" name="login" placeholder="Nome de Login"><br>
 				<input type="password" name="senha" placeholder="*****"><br>
 				<input type="password" name="confirmaSenha" placeholder="confirme a Senha"><br>
-				<input type="file" accept="img/*" name="imagem" id="file" style="display: none;"><label for="file" class="button" name="imagem"><i class="material-icons">photo</i>&nbsp;Escolha uma imagem </label><br>
+				<input type="file" accept="img/*" name="imagem" id="file" style="display: none;"><label for="file" class="button"><i class="material-icons">photo</i>&nbsp;Escolha uma imagem </label><br>
 				<textarea name="bio" placeholder="coloque sua biografia aqui"></textarea><br>
 				<select name="pais">
 					<?php while($pais = $paisSelect->fetch(PDO::FETCH_ASSOC)){ ?>

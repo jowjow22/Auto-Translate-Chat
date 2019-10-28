@@ -1,17 +1,17 @@
 <?php 
 require_once('classesPHP/conexao.php');
 session_start();
-	if (isset($_SESSION['cd_user']))
-	{
-	 	session_destroy();
-  	}
-  	else{
-  		session_destroy();
-  	}
 $res = "";
 $c = new Conexao;
 $c->conectar("db_autoTranslateChat","localhost","root","");
 $u = new Usuario;
+	if (isset($_SESSION['cd_user']))
+	{
+	 	$u->sair($_SESSION['cd_user']);
+  	}
+  	else{
+  		session_destroy();
+  	}
 if ($_POST) {
 	if (!empty($_POST['login']) && !empty($_POST['senha'])) {
 		$login = $_POST['login'];

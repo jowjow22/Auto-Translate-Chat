@@ -245,13 +245,15 @@ hr {
 }
 .chat-area .friend-message .chat-bubble{
 	max-width: 50%;
+	opacity: 0;
+	margin-top: 200px;
 	padding: 6px 15px;
 	background: #fff;
-	margin: 30px 30px;
+	margin-left: 30px;
 	border-radius: 9px;
 	position: relative;
 	box-shadow: 5px 10px 18px #C0C0C0;
-	animation: fadeIn 1s ease-in;
+	
 }
 .chat-area .friend-message .chat-bubble p{
 	margin-top: 8px;
@@ -262,8 +264,10 @@ hr {
 .chat-area .your-message .chat-bubble{
 	max-width: 50%;
 	padding: 6px 15px;
+	opacity: 0;
+	margin-top: 200px;
 	background-image: linear-gradient(to right, #571a8a, #0c0d5c);
-	margin: 30px 30px;
+	margin-left: 30px;
 	border-radius: 9px;
 	position: relative;
 	box-shadow: 5px 10px 18px #C0C0C0;
@@ -302,15 +306,4 @@ hr {
     border-left-color: #0c0d5c;
 	border-right: 0;
     margin-right: -15px;
-}
-
-@keyframes fadeIn {
-    0% {
-        opacity: 0;
-        margin-top: 200px;
-    }
-    100% {
-        opacity: 1;
-        margin-top: 1;
-    }
 }

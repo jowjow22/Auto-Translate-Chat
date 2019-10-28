@@ -35,7 +35,8 @@ id_adicionado int not null,
 foreign key (id_adicionou) references tb_user (cd_user),
 foreign key (id_adicionado) references tb_user (cd_user)
 );
-select * from tb_user where cd_user in ( select id_adicionado from tb_amizades where id_adicionou != 1 and id_adicionado != 1);
+select * from tb_user where cd_user in ( select id_adicionado from tb_amizades where id_adicionou != 1 and id_adicionado != 1 );
 select * from tb_user;
 insert into tb_paises values(null,"brasil","pt"),(null,"estado unidos","en"),(null,"peru","es");
 insert into tb_amizades values(null,1,2);
+insert into tb_amizades values(null,3,2);

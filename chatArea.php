@@ -1,4 +1,5 @@
-<?php 	
+<?php 
+$f = 0;
 	require_once('classesPHP/conexao.php');
 	 session_start();
 	 if (!isset($_SESSION['cd_user']))
@@ -11,6 +12,7 @@
 	$c->conectar("db_autoTranslateChat","localhost","root","");
 	$u->userDados($_SESSION['cd_user']);
 	$u->selAmigos($_SESSION['cd_user']);
+
 	$userDados = $user->fetch(PDO::FETCH_ASSOC);
 ?>
 <!DOCTYPE html>
@@ -18,6 +20,7 @@
 <head>
 	<title></title>
 	<!-- materialize css -->
+	<script src="node_modules/jquery/dist/jquery.js"></script>
 	<link rel="stylesheet" type="text/css" href="css/estilo.css">
 	<link rel="stylesheet" type="text/css" href="node_modules/bootstrap/compiler/bootstrap.css">
 	<link rel="stylesheet" type="text/css" href="node_modules/font-awesome/css/font-awesome.css">
@@ -43,20 +46,25 @@
 				</form>
 				<div class="friend-messages" data-spy="scroll">
 					<?php while ($amizade = $amg->fetch(PDO::FETCH_ASSOC)) {
+						$f++;
 						if($amizade['id_adicionou'] == $_SESSION['cd_user']){
 							$sql = $pdo->prepare("select * from tb_user where cd_user = :c");
 							$sql->bindValue(":c",$amizade['id_adicionado']);
 							$sql->execute();
 							$amgDados = $sql->fetch(PDO::FETCH_ASSOC);
 						?>
-					<div class="friend">
+				<div class="friend"  onclick="selUser(<?php echo $amgDados['cd_user']?>)">
 					<img src="<?php echo $amgDados['img_user']; ?>" class="user-image float-left">
 					<div class="status <?php echo $amgDados['nm_status'] ?>"></div>
+					<form method="post" id="friend-id-<?php echo $amgDados['cd_user'];?>" class="">
+					<input type="hidden" name="id" value="<?php echo $amgDados['cd_user']; ?>">
+					</form>
 					<span class="time float-right">2:40</span>
 					<h6><?php echo $amgDados['nm_login']; ?></h6>
 					<p class="">minha ultima mensagem é esse nude</p>
 					</div>
 					<hr>
+
 				<?php }
 
 					else{
@@ -65,23 +73,26 @@
 							$sql->execute();
 							$amgDados = $sql->fetch(PDO::FETCH_ASSOC);
 							?>
-					<div class="friend">
+					<div class="friend" onclick="selUser(<?php echo $amgDados['cd_user']?>)">
 					<img src="<?php echo $amgDados['img_user']; ?>" class="user-image float-left">
 					<div class="status <?php echo $amgDados['nm_status'] ?>"></div>
+					<form method="post" id="friend-id-<?php echo $amgDados['cd_user'];?>" class="">
+					<input type="hidden" name="id" value="<?php echo $amgDados['cd_user']; ?>">
+					</form>
 					<span class="time float-right">2:40</span>
 					<h6><?php echo $amgDados['nm_login']; ?></h6>
 					<p class="">minha ultima mensagem é esse nude</p>
 					</div>
 					<hr>
-				<?php }} ?>
+				<?php }}?>
 
 				</div>	
 			</div>
 			<div class="col-md-8">
 				<div class="atual-chat">
-					<img src="img/b.jpg" class="user-image">
-					<h6>Web Namoradita</h6>
-					<div class="status online"></div><p class="text-muted">Online</p>
+					<img src="" id="p-chat-img" style="opacity: 0;" class="user-image">
+					<h6 class="nm_user"></h6>
+					<div class="status" id="atual-chat-status"></div><p class="text-muted" id="status"></p>
 					<span class="atual-chat-icons float-right">
 						<i class="material-icons">video_call</i>
 	          			<i class="material-icons">phone</i>
@@ -198,14 +209,30 @@
     </div>
   </div>
 </div>
-<script src="node_modules/jquery/dist/jquery.js"></script>
+<div class="script"></div>
 <script type="text/javascript">
-	$(document).on('click', '#sair', function(){
+		$(document).on('click', '#sair', function(){
 		window.location = "index.php";
-	});
+		});
+		function selUser(id){
+		$(document).ready(function(){
+			var sel = "#friend-id-"+id;
+				var dados = $(sel).serialize();
+				//tratar erros
+				$.ajax({
+					type: 'POST',
+					url: 'tratamentoDados.php',
+					data: dados,
+					success: function(retorno){
+							$('.script').html(retorno);
+							$('.chat-bubble').animate({"margin-top":"30px","opacity":"1"},"slow");
+							}
+						});
+						return false;
+		});
+	}
 </script>
 <script src="node_modules/popper.js/dist/umd/popper.js"></script>
 <script src="node_modules/bootstrap/dist/js/bootstrap.js"></script>
 <script src="node_modules/@fortawesome/fontawesome-free/js/all.js"></script>
 </body>
-</html>
