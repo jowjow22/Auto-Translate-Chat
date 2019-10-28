@@ -1,5 +1,4 @@
 <?php 
-$f = 0;
 	require_once('classesPHP/conexao.php');
 	 session_start();
 	 if (!isset($_SESSION['cd_user']))
@@ -14,6 +13,10 @@ $f = 0;
 	$u->selAmigos($_SESSION['cd_user']);
 
 	$userDados = $user->fetch(PDO::FETCH_ASSOC);
+	if ($_POST) {
+		 $u->cadastrarMsg($_POST['textarea'], 1, 2);
+	}
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -46,7 +49,6 @@ $f = 0;
 				</form>
 				<div class="friend-messages" data-spy="scroll">
 					<?php while ($amizade = $amg->fetch(PDO::FETCH_ASSOC)) {
-						$f++;
 						if($amizade['id_adicionou'] == $_SESSION['cd_user']){
 							$sql = $pdo->prepare("select * from tb_user where cd_user = :c");
 							$sql->bindValue(":c",$amizade['id_adicionado']);
@@ -231,6 +233,20 @@ $f = 0;
 						return false;
 		});
 	}
+
+	$(document).on('submit','#form',function(){
+				var dados = $(this).serialize();
+				//tratar erros
+				$.ajax({
+					type: 'POST',
+					url: 'chatArea.php',
+					data: dados,
+					success: function(retorno){
+							$('#msg').val("");
+					}
+				});
+				return false;
+		});
 </script>
 <script src="node_modules/popper.js/dist/umd/popper.js"></script>
 <script src="node_modules/bootstrap/dist/js/bootstrap.js"></script>

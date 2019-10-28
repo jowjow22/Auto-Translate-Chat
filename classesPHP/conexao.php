@@ -90,6 +90,7 @@ Class Usuario
 		$amg = $pdo->prepare("select * from tb_amizades where id_adicionou = :c or id_adicionado = :c");
 		$amg->bindValue(":c",$id);
 		$amg->execute();
+
 		}
 	public function sair($id){
 		global $pdo;
@@ -111,6 +112,19 @@ Class Usuario
 			$("#p-chat-img").animate({"opacity":"1"},"slow");
 			$("#atual-chat-status").addClass("'.$userF['nm_status'].'");
 			</script>';
+	}
+	public function cadastrarMsg($msg, $origem, $dest){
+		global $pdo;
+		$dat=date('H:i:s');
+		$sql= $pdo->prepare('INSERT into tb_msg VALUES(null, :m, :dt, :o, :d)');
+		$sql->bindValue(":m", $msg);
+		$sql->bindValue(":dt", $dat);
+		$sql->bindValue(":o", $origem);
+		$sql->bindValue(":d", $dest);
+		$sql->execute();	
+	}
+	public function selMsg(){
+		
 	}
 
 }
