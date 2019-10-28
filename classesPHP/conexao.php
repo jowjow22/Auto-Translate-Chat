@@ -111,6 +111,7 @@ Class Usuario
 			$("#p-chat-img").attr("src","'.$userF['img_user'].'");
 			$("#p-chat-img").animate({"opacity":"1"},"slow");
 			$("#atual-chat-status").addClass("'.$userF['nm_status'].'");
+			$("#destinatario").val("'.$userF['cd_user'].'");
 			</script>';
 	}
 	public function cadastrarMsg($msg, $origem, $dest){

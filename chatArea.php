@@ -14,7 +14,7 @@
 
 	$userDados = $user->fetch(PDO::FETCH_ASSOC);
 	if ($_POST) {
-		 $u->cadastrarMsg($_POST['textarea'], 1, 2);
+		 $u->cadastrarMsg($_POST['textarea'], $_SESSION['cd_user'], $_POST['destinatario']);
 	}
 
 ?>
@@ -168,6 +168,7 @@
 						</div>
 					</div>
 						<form class="send-messages-area" method="post" id="form">
+							<input value="" type="hidden" name="destinatario" id="destinatario">
 							<textarea placeholder="Mande Mensagens!" name="textarea" id="msg"></textarea><button type="submit" class="float-right"><i class="material-icons">send</i></button>
 						</form>
 						<!-- <input type="hidden" name="">https://codepen.io/FilipRastovic/pen/pXgqKK</input> -->
